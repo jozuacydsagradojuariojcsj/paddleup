@@ -15,3 +15,17 @@ npm start
 Backend Start: <br />
 ```
 npm run devStart
+```
+
+Another thing, since each machine has different IP addresses make sure that the url for the backend is the machine's IP address. For example: <br />
+I ran the code for starting both backend and frontend <br />
+```
+npm run start
+npm run devStart
+```
+and the machine IP Address showed 192.168.1.17, so the url in the frontend should also show my IP Address, if you are debugging in phone, and make sure of the port number
+```
+const client = axios.create({
+  baseURL: "http://192.168.1.17:3000",
+});
+```
