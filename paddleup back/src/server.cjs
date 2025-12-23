@@ -11,8 +11,10 @@ require("dotenv").config();
 const port = process.env.PORT;
 
 const authRouter = require("./routes/auth");
+const coachRouter = require("./routes/coach")
 
 app.use("/user", authRouter);
+app.use("/coach", coachRouter);
 /*
 const userRouter = require("./routes/users");
 const adminRouter = require("./routes/admin");
