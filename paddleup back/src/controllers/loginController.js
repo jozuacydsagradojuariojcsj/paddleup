@@ -14,9 +14,8 @@ const loginController = async (req, res) => {
     console.log(`Request Body: ${JSON.stringify(req.body)}`);
 
     if (!identifier || !password) {
-      return res
-        .status(400)
-        .json({ error: "Missing username or email or password" });
+      res.status(400).json({ error: "Missing username or email or password" });
+        return;
     }
 
     if (identifier == userIdentifier && password == userPassword) {

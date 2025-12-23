@@ -15,6 +15,9 @@ const coachRouter = require("./routes/coach")
 
 app.use("/user", authRouter);
 app.use("/coach", coachRouter);
+
+
+
 /*
 const userRouter = require("./routes/users");
 const adminRouter = require("./routes/admin");
