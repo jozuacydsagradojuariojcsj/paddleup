@@ -12,9 +12,10 @@ const coachMockData = [
         email: "juariojedcyrus@gmail.com",
         facebook: "Jed Cyrus Sagrado Juario",
         contact:"09269673682",
+        booking:[]
     },
      {
-        coachId: "C123",
+        coachId: "C124",
         name: "Joshua Manlangit",
         stars: 4.9,
         achievement1: "2 years of competetive pickleball experience",
@@ -24,8 +25,12 @@ const coachMockData = [
         email: "juariojedcyrus@gmail.com",
         facebook: "Jed Cyrus Sagrado Juario",
         contact:"09269673682",
+        booking:[]
     },
 ]
+
+
+const newBookings = [];
 
 const getCoachController = async (req, res) => {
     try{
@@ -38,5 +43,30 @@ const getCoachController = async (req, res) => {
     }
 };
 
+const bookCoachController = async (req, res) => {
+    try{
+        const {coachId, userId, user, date, time, pax} = req.body;
 
-module.exports = { getCoachController };
+        if(!coachId || !userId || !user || !date || !time || !pax){
+            res.status(400).json({error:"Required Fields are: coachId, userId, user, date, time, pax"});
+            return;
+        }
+
+        const coach = coachMockData.find(c => c.coachId === coachId);
+        if(!coach) {
+            res.status(404).json({error:"No Coach Found"});
+            return;
+        }
+
+        const newBooking = {coachId, userId, user, date, time, pax};
+        coach.booking.push(newBooking);
+
+        res.status(200).json({message: "Booking made successfully"});
+        return;
+    }catch (e) {
+        res.status(500).json({error:"Internal Server Error"});
+    }
+}
+
+
+module.exports = { getCoachController, bookCoachController };
