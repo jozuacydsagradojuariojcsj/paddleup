@@ -1,9 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
-import { FlatList, Pressable, ScrollView, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { FlatList, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/Header";
 
 const HomeScreen = () => {
+
+    const navigation = useNavigation();
+
     const coachMockData = [
   {
     coachId: "C123",
@@ -49,9 +53,6 @@ const HomeScreen = () => {
         <>
         <SafeAreaView className="h-screen flex-col flex-1">
             <Header headerText={"HOME"}/>
-
-            <ScrollView contentContainerStyle={{ paddingBottom: 24 }}
-        showsVerticalScrollIndicator={false}>
              <View className="border border-black h-full">
                 <Text className="text-xl font-bold p-8">
                     Coaches
@@ -70,25 +71,16 @@ const HomeScreen = () => {
                             <Text className="text-sm font-medium color-white">{item.name}</Text>
                             <Text className="text-sm font-medium color-white">{item.stars} <Ionicons name="star"/></Text>
                         </View>
-                        <Pressable className="border border-black bg-white min-h-6 min-w-[150px] rounded-full items-center">
+                        <Pressable className="border border-black bg-white min-h-6 min-w-[150px] rounded-full items-center" onPress={() => {
+                            navigation.navigate("Coach")
+                        }}>
                             <Text className="text-sm">More Information</Text>
                         </Pressable>
                     </View>
                 )}>
                 </FlatList>
                 </View>
-                <View className='border border-red-500 min-h-full'>
-
-                </View>
             </View>
-
-            </ScrollView>
-
-           
-            
-
-
-
         </SafeAreaView>
         </>
     )
