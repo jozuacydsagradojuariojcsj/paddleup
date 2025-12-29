@@ -1,16 +1,16 @@
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import * as SecureStore from "expo-secure-store";
+import { useEffect, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/Header";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import { useEffect, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import axios from "axios";
-import { BASE_URL } from "@env";
-import * as SecureStore from "expo-secure-store";
+import config from "../constants/api";
 
 const Booking = ({ route }) => {
+  const BASE_URL = config.API_URL;
   const { coachName, coachId } = route.params;
-
   const [coachNameState, setCoachName] = useState();
   const [coachIdState, setCoachId] = useState();
   const [accessToken, setAccessToken] = useState();

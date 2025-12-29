@@ -16,7 +16,7 @@ export default function Index() {
   return (
     <GluestackUIProvider>
       <Stack.Navigator
-        initialRouteName="Landing"
+        initialRouteName="LogIn"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Landing" component={LandingScreen} />

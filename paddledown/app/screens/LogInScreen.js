@@ -11,7 +11,7 @@ import { COLORS } from "../constants/Colors";
 
 // Replace with your actual image paths
 const LOGO_IMAGE = require("../assets/images/logo.png");
-const BACKGROUND_IMAGE = require("../assets/images/background.png");
+const BACKGROUND_IMAGE = require("../assets/images/PickleballCourt1.jpg");
 
 const windowHeight = Dimensions.get("window").height;
 

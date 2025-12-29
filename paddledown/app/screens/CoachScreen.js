@@ -1,14 +1,15 @@
 import { MaterialIcons } from "@expo/vector-icons";
-import { Pressable, ScrollView, Text, View, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import * as SecureStore from "expo-secure-store";
+import { useEffect, useState } from "react";
+import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/Header";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { BASE_URL } from "@env";
-import * as SecureStore from "expo-secure-store";
-import { useNavigation } from "@react-navigation/native";
+import config from "../constants/api";
 
 const Coach = ({ route }) => {
+  const BASE_URL = config.API_URL;
   const { coachId } = route.params;
   const navigation = useNavigation();
   const [coach, setCoach] = useState();

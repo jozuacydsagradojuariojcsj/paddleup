@@ -1,3 +1,6 @@
+import axios from "axios";
+import * as SecureStore from "expo-secure-store";
+import { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -7,23 +10,28 @@ import {
   View,
 } from "react-native";
 import { COLORS } from "../constants/Colors";
-import { useState } from "react";
-import axios from "axios";
-import * as SecureStore from "expo-secure-store";
+import config from "../constants/api";
 
+const BASE_URL = config.API_URL;
 const LOGO_IMAGE = require("../assets/images/logo.png");
 const client = axios.create({
-  baseURL: "http://192.168.1.17:3000",
+  baseURL: BASE_URL,
 });
 
 const LogInScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     console.log("Sending login data:", { identifier: username, password });
 
+    if (loading) return;
+
     try {
+      setLoading(true);
+
       const response = await client.post("/user/login", {
         identifier: username,
         password,
@@ -37,6 +45,7 @@ const LogInScreen = ({ navigation }) => {
       await SecureStore.setItemAsync("accessToken", token);
       await SecureStore.setItemAsync("userId", user?.userId);
       await SecureStore.setItemAsync("userName", user?.identifier);
+      setData(response);
 
       navigation.navigate("HomeScreen");
     } catch (e) {
@@ -49,6 +58,8 @@ const LogInScreen = ({ navigation }) => {
       } else {
         console.error("Error:", e.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,10 +90,15 @@ const LogInScreen = ({ navigation }) => {
       />
 
       <TouchableOpacity
-        style={[styles.button, styles.mainAuthButton]}
+        style={[
+          styles.button,
+          styles.mainAuthButton,
+          loading && { opacity: 0.7 },
+        ]}
         onPress={handleLogin}
+        disabled={loading}
       >
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>{loading ? "Loading" : "Login"}</Text>
       </TouchableOpacity>
 
       <Text style={styles.authLinkText}>

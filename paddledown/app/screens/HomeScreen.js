@@ -1,21 +1,22 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import * as SecureStore from "expo-secure-store";
+import { useEffect, useState } from "react";
 import {
   FlatList,
+  Image,
   Pressable,
+  ScrollView,
   Text,
   View,
-  ScrollView,
-  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../components/Header";
-import * as SecureStore from "expo-secure-store";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { BASE_URL } from "@env";
+import config from "../constants/api";
 
 const HomeScreen = () => {
+  const BASE_URL = config.API_URL;
   const navigation = useNavigation();
   const [accessToken, setAccessToken] = useState(null);
   const [coaches, setCoaches] = useState();
@@ -77,7 +78,7 @@ const HomeScreen = () => {
         console.log("Response Data:", response.data[0].coachName);
       }
     } catch (e) {
-      console.error("Error:", e);
+      console.log("Error:", e);
     }
   };
 
