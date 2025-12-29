@@ -2,7 +2,7 @@
 
 After cloning to local machine make sure that you are in the right directory or folder. <br />
 ```
-cd "paddleup front"
+cd "paddledown"
 cd "paddleup back"
 npm i
 ```
